@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +15,18 @@ namespace FactorioBlueprintHelper.Model.BlueprintObjects
 
         public PositionBO Position { get; set; }
 
-        public int Direction { get; set; }
-
-        public ConnectionBO[] Connections { get; set; }
-
+        [JsonProperty(PropertyName = "control_behavior")]
         public ControlBehaviourBO ControlBehaviour { get; set; }
+
+        public int? Direction { get; set; }
+
+        public ConnectionBO Connections { get; set; }
 
         public ItemRequestBO Items { get; set; } // TODO: find out how this works
 
         public string Recipe { get; set; }
 
-        public int Bar { get; set; }
+        public int? Bar { get; set; }
 
         public InfinitySettingsBO InfinitySettings { get; set; }
 
@@ -38,7 +40,7 @@ namespace FactorioBlueprintHelper.Model.BlueprintObjects
 
         public ItemFilterBO Filters { get; set; }
 
-        public int OverrideStackSizesss { get; set; }
+        public int? OverrideStackSize { get; set; }
 
         public PositionBO DropPosition { get; set; }
 
@@ -46,13 +48,13 @@ namespace FactorioBlueprintHelper.Model.BlueprintObjects
 
         public LogisticFilterBO[] RequestFilters { get; set; }
 
-        public bool RequestFromBuffers { get; set; }
+        public bool? RequestFromBuffers { get; set; }
 
         public SpeakerParameterBO Parameters { get; set; }
 
         public SpeakerParameterBO AlertParameters { get; set; }
 
-        public bool AutoLaunch { get; set; }
+        public bool? AutoLaunch { get; set; }
 
         public object Variation { get; set; } // TODO: find out what is it
 

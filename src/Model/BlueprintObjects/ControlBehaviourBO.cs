@@ -10,6 +10,6 @@ namespace FactorioBlueprintHelper.Model.BlueprintObjects
     {
         public CircuitConditionBO CircuitCondition { get; set; }
 
-        public bool UseColors { get; set; }
+        public bool? UseColors { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FactorioBlueprintHelper.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FactorioBlueprintHelper
+namespace FactorioBlueprintHelper.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +24,18 @@ namespace FactorioBlueprintHelper
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var t = Serializer.Decode(textBox.Text);
+
+            textBoxOut.Text = Serializer.Encode(t);
+
+            if (textBox.Text != textBoxOut.Text)
+            {
+                this.Background = new SolidColorBrush(Colors.Red);
+            }
         }
     }
 }

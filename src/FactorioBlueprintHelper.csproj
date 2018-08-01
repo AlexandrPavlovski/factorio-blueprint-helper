@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.11.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetZip.1.11.0\lib\net20\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -57,7 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -65,7 +68,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Model\Serializer.cs" />
+    <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -73,10 +77,13 @@
   <ItemGroup>
     <Compile Include="Model\BlueprintObjects\BlueprintBO.cs" />
     <Compile Include="Model\BlueprintObjects\BlueprintBookBO.cs" />
+    <Compile Include="Model\BlueprintObjects\BlueprintRoot.cs" />
+    <Compile Include="Model\BlueprintObjects\CircuitConditionBO.cs" />
     <Compile Include="Model\BlueprintObjects\ColorBO.cs" />
     <Compile Include="Model\BlueprintObjects\ConnectionBO.cs" />
     <Compile Include="Model\BlueprintObjects\ConnectionDataBO.cs" />
     <Compile Include="Model\BlueprintObjects\ConnectionPointBO.cs" />
+    <Compile Include="Model\BlueprintObjects\ControlBehaviourBO.cs" />
     <Compile Include="Model\BlueprintObjects\EntityBO.cs" />
     <Compile Include="Model\BlueprintObjects\IconBO.cs" />
     <Compile Include="Model\BlueprintObjects\InfinityFilterBO.cs" />
@@ -84,6 +91,7 @@
     <Compile Include="Model\BlueprintObjects\ItemFilterBO.cs" />
     <Compile Include="Model\BlueprintObjects\ItemRequestBO.cs" />
     <Compile Include="Model\BlueprintObjects\LogisticFilterBO.cs" />
+    <Compile Include="Model\BlueprintObjects\PositionBO.cs" />
     <Compile Include="Model\BlueprintObjects\SignalIdBO.cs" />
     <Compile Include="Model\BlueprintObjects\SpeakerAlertParameterBO.cs" />
     <Compile Include="Model\BlueprintObjects\SpeakerParameterBO.cs" />

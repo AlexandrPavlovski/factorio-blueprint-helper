@@ -10,6 +10,6 @@ namespace FactorioBlueprintHelper.Model.BlueprintObjects
     {
         public int EntityId { get; set; }
 
-        public int CircuitId { get; set; }
+        public int? CircuitId { get; set; }
     }
 }
