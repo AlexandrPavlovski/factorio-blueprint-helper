@@ -1,4 +1,5 @@
 ﻿using FactorioBlueprintHelper.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,18 @@ namespace FactorioBlueprintHelper.UI
             if (textBox.Text != textBoxOut.Text)
             {
                 this.Background = new SolidColorBrush(Colors.Red);
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.RestoreDirectory = true;
+            if (ofd.ShowDialog() ?? false)
+            {
+                var imageEd = new ImageEditor(ofd.FileName);
+                imageEd.RoundToLampColors();
+                imageEd.SaveOnDisk();
             }
         }
     }
