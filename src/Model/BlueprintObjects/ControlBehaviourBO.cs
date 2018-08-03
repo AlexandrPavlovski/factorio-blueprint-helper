@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FactorioBlueprintHelper.Model.BlueprintObjects
 {
-    public class ControlBehaviourBO
+    public class ControlBehaviorBO
     {
         public CircuitConditionBO CircuitCondition { get; set; }
 

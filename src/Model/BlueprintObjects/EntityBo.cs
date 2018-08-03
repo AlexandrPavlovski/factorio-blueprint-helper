@@ -15,8 +15,7 @@ namespace FactorioBlueprintHelper.Model.BlueprintObjects
 
         public PositionBO Position { get; set; }
 
-        [JsonProperty(PropertyName = "control_behavior")]
-        public ControlBehaviourBO ControlBehaviour { get; set; }
+        public ControlBehaviorBO ControlBehavior { get; set; }
 
         public int? Direction { get; set; }
 

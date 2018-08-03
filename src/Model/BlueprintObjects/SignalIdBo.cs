@@ -8,8 +8,10 @@ namespace FactorioBlueprintHelper.Model.BlueprintObjects
 {
     public class SignalIdBO
     {
-        public string Type { get; set; } // can be "item", "fluid", "virtual"
+        /// Possible values stored in SignalTypes class
+        public string Type { get; set; }
 
+        /// Possible values stored in EntityNames class
         public string Name { get; set; }
     }
 }

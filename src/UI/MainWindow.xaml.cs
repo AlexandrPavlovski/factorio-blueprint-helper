@@ -1,4 +1,6 @@
 ﻿using FactorioBlueprintHelper.Model;
+using FactorioBlueprintHelper.Model.BlueprintConstatns;
+using FactorioBlueprintHelper.Model.BlueprintObjects;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -29,14 +31,7 @@ namespace FactorioBlueprintHelper.UI
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var t = Serializer.Decode(textBox.Text);
-
-            textBoxOut.Text = Serializer.Encode(t);
-
-            if (textBox.Text != textBoxOut.Text)
-            {
-                this.Background = new SolidColorBrush(Colors.Red);
-            }
+            
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -45,9 +40,9 @@ namespace FactorioBlueprintHelper.UI
             ofd.RestoreDirectory = true;
             if (ofd.ShowDialog() ?? false)
             {
-                var imageEd = new ImageEditor(ofd.FileName);
-                imageEd.RoundToLampColors();
-                imageEd.SaveOnDisk();
+                var imageWorker = new ImageWorker(ofd.FileName);
+                var libb = new LampImageBlueprintBuilder();
+                textBoxOut.Text = libb.CreateColoredLampsImageBluepring(imageWorker);
             }
         }
     }

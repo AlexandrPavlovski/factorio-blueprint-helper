@@ -11,32 +11,36 @@ using System.Threading.Tasks;
 
 namespace FactorioBlueprintHelper.Model
 {
-    public class ImageEditor
+    public class ImageWorker
     {
-        private FastBitmap _bitmap;
-        //private Bitmap _bitmap;
         private DirectBitmap dbmp;
         private string _filePath;
 
-        public ImageEditor(string filePath)
+        public FastBitmap Bitmap { get; private set; }
+
+        public ImageWorker(string filePath)
         {
             _filePath = filePath;
-            _bitmap = new FastBitmap(Image.FromFile(filePath));
-            dbmp = new DirectBitmap(_bitmap.Width, _bitmap.Height);
+            Bitmap = new FastBitmap(Image.FromFile(filePath));
+            dbmp = new DirectBitmap(Bitmap.Width, Bitmap.Height);
         }
 
         public void RoundToLampColors()
         {
-            for (int x = 0; x < _bitmap.Width; x++)
-                for (int y = 0; y < _bitmap.Height; y++)
+            for (int x = 0; x < Bitmap.Width; x++)
+                for (int y = 0; y < Bitmap.Height; y++)
                 {
-                    Color pix = _bitmap.GetPixel(x, y);
-                    var newPix = GetClosestLampColor(pix);
+                    Color newPix = GetClosestLampColor(x, y);
                     dbmp.SetPixel(x, y, newPix);
                 }
         }
 
-        private Color GetClosestLampColor(Color pixel)
+        public Color GetClosestLampColor(int x, int y)
+        {
+            return GetClosestLampColor(Bitmap.GetPixel(x, y));
+        }
+
+        public Color GetClosestLampColor(Color pixel)
         {
             Color closest = Color.Transparent;
             float minDist = float.MaxValue;
@@ -81,7 +85,7 @@ namespace FactorioBlueprintHelper.Model
             Height = height;
             Bits = new Int32[width * height];
             BitsHandle = GCHandle.Alloc(Bits, GCHandleType.Pinned);
-            Bitmap = new Bitmap(width, height, width * 4, PixelFormat.Format32bppPArgb, BitsHandle.AddrOfPinnedObject());
+            Bitmap = new Bitmap(width, height, width * 4, PixelFormat.Format32bppArgb, BitsHandle.AddrOfPinnedObject());
         }
 
         public void SetPixel(int x, int y, Color colour)

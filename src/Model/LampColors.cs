@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FactorioBlueprintHelper.Model.BlueprintConstatns;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -19,5 +20,17 @@ namespace FactorioBlueprintHelper.Model
         public static Color Cyan = Color.FromArgb(255, 0, 255, 255);
 
         public static Color[] AllColors = new[] { Black, White, Red, Green, Blue, Yellow, Magenta, Cyan };
+
+        public static Dictionary<Color, string> ColorToSignalLookup = new Dictionary<Color, string>
+        {
+            { Black, VirtualSignalNames.Black },
+            { White, VirtualSignalNames.White },
+            { Red, VirtualSignalNames.Red },
+            { Green, VirtualSignalNames.Green },
+            { Blue, VirtualSignalNames.Blue },
+            { Yellow, VirtualSignalNames.Yellow },
+            { Magenta, VirtualSignalNames.Magenta },
+            { Cyan, VirtualSignalNames.Cyan }
+        };
     }
 }
