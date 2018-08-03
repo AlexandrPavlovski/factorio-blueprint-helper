@@ -20,12 +20,17 @@ namespace FactorioBlueprintHelper.Model.MapEntities
 
         public override EntityBO ToBlueprintObject(int number)
         {
-            return new EntityBO
+            EntityBO entity = base.ToBlueprintObject(number);
+
+            entity.Connections = new ConnectionBO
             {
-                EntityNumber = number,
-                Name = Name,
-                Position = new PositionBO { X = X, Y = Y },
+                _1 = new ConnectionPointBO
+                {
+                    Red = 
+                }
             };
+
+            return entity;
         }
     }
 }

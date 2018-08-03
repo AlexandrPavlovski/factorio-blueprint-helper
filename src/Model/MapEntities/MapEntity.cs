@@ -13,12 +13,18 @@ namespace FactorioBlueprintHelper.Model.MapEntities
         public float X;
         public float Y;
 
+        public List<WireConnection> RedConnections;
+        public List<WireConnection> GreenConnections;
+
         public string Name { get; protected set; }
 
         public MapEntity(float x, float y)
         {
             X = x;
             Y = y;
+
+            RedConnections = new List<WireConnection>();
+            GreenConnections = new List<WireConnection>();
         }
 
         public virtual EntityBO ToBlueprintObject(int number)

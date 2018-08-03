@@ -78,11 +78,13 @@
     <Compile Include="Model\BlueprintConstatns\SignalTypes.cs" />
     <Compile Include="Model\BlueprintConstatns\VirtualSignalNames.cs" />
     <Compile Include="Model\BlueprintFactory.cs" />
+    <Compile Include="Model\ColorLampRegion.cs" />
     <Compile Include="Model\ImageWorker.cs" />
     <Compile Include="Model\LampColors.cs" />
     <Compile Include="Model\LampImageBlueprintBuilder.cs" />
     <Compile Include="Model\Map.cs" />
     <Compile Include="Model\MapEntities\Substation.cs" />
+    <Compile Include="Model\MapEntities\WireConnection.cs" />
     <Compile Include="Model\Serializer.cs" />
     <Compile Include="Model\MapEntities\Lamp.cs" />
     <Compile Include="Model\MapEntities\MapEntity.cs" />
