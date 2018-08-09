@@ -18,16 +18,23 @@ namespace FactorioBlueprintHelper.Model.MapEntities
             Name = EntityNames.SmallLamp;
         }
 
-        public override EntityBO ToBlueprintObject(int number)
+        public override EntityBO ToBlueprintObject()
         {
-            EntityBO entity = base.ToBlueprintObject(number);
+            EntityBO entity = base.ToBlueprintObject();
 
-            entity.Connections = new ConnectionBO
+            entity.ControlBehavior = new ControlBehaviorBO
             {
-                _1 = new ConnectionPointBO
+                CircuitCondition = new CircuitConditionBO
                 {
-                    Red = 
-                }
+                    Comparator = SignalComparators.Greater,
+                    Constant = 0,
+                    FirstSignal = new SignalIdBO
+                    {
+                        Name = VirtualSignalNames.Any,
+                        Type = SignalTypes.Virtual
+                    }
+                },
+                UseColors = true
             };
 
             return entity;

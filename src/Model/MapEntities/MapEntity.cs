@@ -10,6 +10,8 @@ namespace FactorioBlueprintHelper.Model.MapEntities
 {
     public abstract class MapEntity
     {
+        public int Number;
+
         public float X;
         public float Y;
 
@@ -27,14 +29,27 @@ namespace FactorioBlueprintHelper.Model.MapEntities
             GreenConnections = new List<WireConnection>();
         }
 
-        public virtual EntityBO ToBlueprintObject(int number)
+        public virtual EntityBO ToBlueprintObject()
         {
-            return new EntityBO
+            var entity = new EntityBO
             {
-                EntityNumber = number,
+                EntityNumber = Number,
                 Name = Name,
                 Position = new PositionBO { X = X, Y = Y }
             };
+
+            if (RedConnections.Any())
+            {
+                entity.Connections = new ConnectionBO
+                {
+                    _1 = new ConnectionPointBO
+                    {
+                        Red = RedConnections.Select(x => x.ToBlueprintObject()).ToArray()
+                    }
+                };
+            }
+
+            return entity;
         }
     }
 }

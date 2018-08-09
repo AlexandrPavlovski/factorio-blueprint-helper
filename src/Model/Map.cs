@@ -87,6 +87,12 @@ namespace FactorioBlueprintHelper.Model
             int centerY = Height / 2;
 
             int entityNumber = 1;
+            for (int x = 0; x < Width; x++)
+                for (int y = 0; y < Height; y++)
+                    if (_map[x, y] != null)
+                    {
+                        _map[x, y].Number = entityNumber++;
+                    }
 
             for (int x = 0; x < Width; x++)
                 for (int y = 0; y < Height; y++)
@@ -94,7 +100,7 @@ namespace FactorioBlueprintHelper.Model
                     var mapEntity = _map[x, y];
                     if (mapEntity != null)
                     {
-                        entities.Add(mapEntity.ToBlueprintObject(entityNumber++));
+                        entities.Add(mapEntity.ToBlueprintObject());
                     }
                 }
 

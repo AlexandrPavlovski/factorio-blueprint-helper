@@ -20,7 +20,7 @@ namespace FactorioBlueprintHelper.Model
             var map = new Map(bmp.Width, bmp.Height);
             var colorGroups = new Dictionary<string, List<Lamp>>();
 
-            map.FillWithSubstations();
+            //map.FillWithSubstations();
 
             for (int x = 0; x < bmp.Width; x++)
                 for (int y = 0; y < bmp.Height; y++)
@@ -51,7 +51,11 @@ namespace FactorioBlueprintHelper.Model
                 while (group.Value.Count != 0)
                 {
                     var region = new ColorLampRegion(group.Key);
-                    BuildConnectionTreeAndFillRegion(region, group.Value, map, group.Value.First());
+
+                    Lamp firstLamp = group.Value.First();
+                    region.AddLamp(firstLamp);
+
+                    BuildConnectionTreeAndFillRegion(region, group.Value, map, firstLamp);
                     colorRegions.Add(region);
                 }
             }
@@ -61,71 +65,36 @@ namespace FactorioBlueprintHelper.Model
 
         private void BuildConnectionTreeAndFillRegion(ColorLampRegion region, List<Lamp> colorLampGroup, Map map, Lamp lamp)
         {
-            Lamp neighbourLamp = CreateConnectionToNeighbour(-1, -1, lamp, map);
-            if (neighbourLamp != null)
-            {
-                region.AddLamp(neighbourLamp);
-                BuildConnectionTreeAndFillRegion(region, colorLampGroup, map, neighbourLamp);
-            }
-            neighbourLamp = CreateConnectionToNeighbour( 0, -1, lamp, map);
-            if (neighbourLamp != null)
-            {
-                region.AddLamp(neighbourLamp);
-                BuildConnectionTreeAndFillRegion(region, colorLampGroup, map, neighbourLamp);
-            }
-            neighbourLamp = CreateConnectionToNeighbour( 1, -1, lamp, map);
-            if (neighbourLamp != null)
-            {
-                region.AddLamp(neighbourLamp);
-                BuildConnectionTreeAndFillRegion(region, colorLampGroup, map, neighbourLamp);
-            }
-            neighbourLamp = CreateConnectionToNeighbour(-1,  0, lamp, map);
-            if (neighbourLamp != null)
-            {
-                region.AddLamp(neighbourLamp);
-                BuildConnectionTreeAndFillRegion(region, colorLampGroup, map, neighbourLamp);
-            }
-            neighbourLamp = CreateConnectionToNeighbour( 1,  0, lamp, map);
-            if (neighbourLamp != null)
-            {
-                region.AddLamp(neighbourLamp);
-                BuildConnectionTreeAndFillRegion(region, colorLampGroup, map, neighbourLamp);
-            }
-            neighbourLamp = CreateConnectionToNeighbour(-1,  1, lamp, map);
-            if (neighbourLamp != null)
-            {
-                region.AddLamp(neighbourLamp);
-                BuildConnectionTreeAndFillRegion(region, colorLampGroup, map, neighbourLamp);
-            }
-            neighbourLamp = CreateConnectionToNeighbour( 0,  1, lamp, map);
-            if (neighbourLamp != null)
-            {
-                region.AddLamp(neighbourLamp);
-                BuildConnectionTreeAndFillRegion(region, colorLampGroup, map, neighbourLamp);
-            }
-            neighbourLamp = CreateConnectionToNeighbour( 1,  1, lamp, map);
-            if (neighbourLamp != null)
-            {
-                region.AddLamp(neighbourLamp);
-                BuildConnectionTreeAndFillRegion(region, colorLampGroup, map, neighbourLamp);
-            }
+            for (int i = -1; i < 2; i++)
+                for (int j = -1; j < 2; j++)
+                {
+                    if (i == 0 && j == 0) continue;
+
+                    Lamp neighbourLamp = CreateConnectionToNeighbour(i, j, lamp, map);
+                    if (neighbourLamp != null)
+                    {
+                        region.AddLamp(neighbourLamp);
+                        BuildConnectionTreeAndFillRegion(region, colorLampGroup, map, neighbourLamp);
+                    }
+                }
 
             colorLampGroup.Remove(lamp);
         }
 
-        private Lamp CreateConnectionToNeighbour(int neighbourX, int neighbourY, Lamp lamp, Map map)
+        private Lamp CreateConnectionToNeighbour(int neighbourRelativeX, int neighbourRelativeY, Lamp lamp, Map map)
         {
-            int x = (int)lamp.X + neighbourX;
-            int y = (int)lamp.Y + neighbourY;
+            int x = (int)lamp.X + neighbourRelativeX;
+            int y = (int)lamp.Y + neighbourRelativeY;
 
-            if (x < 0 || y < 0 || x > map.Width || y > map.Height)
+            if (x < 0 || y < 0 || x >= map.Width || y >= map.Height)
                 return null;
 
             var neighbourLamp = map[x, y] as Lamp;
             if (neighbourLamp != null && neighbourLamp.Color == lamp.Color)
             {
-                if (neighbourLamp.RedConnections.Any(c => c.Second != lamp) || 
-                    lamp.RedConnections.Any(c => c.Second != neighbourLamp))
+                //if (neighbourLamp.RedConnections.All(c => c.Second != lamp) &&
+                //    lamp.RedConnections.All(c => c.Second != neighbourLamp))
+                    if (neighbourLamp.RedConnections.Count == 0)
                 {
                     lamp.RedConnections.Add(new WireConnection(lamp, neighbourLamp));
                     neighbourLamp.RedConnections.Add(new WireConnection(neighbourLamp, lamp));

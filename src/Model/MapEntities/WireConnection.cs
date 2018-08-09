@@ -25,8 +25,10 @@ namespace FactorioBlueprintHelper.Model.MapEntities
         {
             var data = new ConnectionDataBO
             {
-                EntityId = Second.;
+                EntityId = Second.Number
             };
+
+            return data;
         }
     }
 }
