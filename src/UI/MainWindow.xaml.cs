@@ -24,6 +24,8 @@ namespace FactorioBlueprintHelper.UI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PreviewDrawer pidr = new PreviewDrawer();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,14 +38,29 @@ namespace FactorioBlueprintHelper.UI
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            this.Canvas.Children.Clear();
+
             var ofd = new OpenFileDialog();
             ofd.RestoreDirectory = true;
             if (ofd.ShowDialog() ?? false)
             {
                 var imageWorker = new ImageWorker(ofd.FileName);
                 var libb = new LampImageBlueprintBuilder();
-                textBoxOut.Text = libb.CreateColoredLampsImageBluepring(imageWorker);
+                Map map = libb.CreateColoredLampsImageBluepringMap(imageWorker);
+                //textBoxOut.Text = map.ToEncodedString();
+
+                pidr.Init(this.Canvas, map);
             }
+        } 
+
+        private void DrawPreview(Map map)
+        {
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            pidr.ToggleGrid();
+
         }
     }
 }

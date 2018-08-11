@@ -14,7 +14,7 @@ namespace FactorioBlueprintHelper.Model
     {
         public LampImageBlueprintBuilder() { }
 
-        public string CreateColoredLampsImageBluepring(ImageWorker imageWorker)
+        public Map CreateColoredLampsImageBluepringMap(ImageWorker imageWorker)
         {
             var bmp = imageWorker.Bitmap;
             var map = new Map(bmp.Width, bmp.Height);
@@ -60,7 +60,7 @@ namespace FactorioBlueprintHelper.Model
                 }
             }
 
-            return map.ToEncodedString();
+            return map;
         }
 
         private void BuildConnectionTreeAndFillRegion(ColorLampRegion region, List<Lamp> colorLampGroup, Map map, Lamp lamp)

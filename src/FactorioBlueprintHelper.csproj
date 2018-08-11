@@ -85,6 +85,7 @@
     <Compile Include="Model\Map.cs" />
     <Compile Include="Model\MapEntities\Substation.cs" />
     <Compile Include="Model\MapEntities\WireConnection.cs" />
+    <Compile Include="Model\PreviewDrawer.cs" />
     <Compile Include="Model\Serializer.cs" />
     <Compile Include="Model\MapEntities\Lamp.cs" />
     <Compile Include="Model\MapEntities\MapEntity.cs" />
